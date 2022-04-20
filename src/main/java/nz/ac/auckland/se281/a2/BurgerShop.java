@@ -6,27 +6,6 @@ import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 
 public class BurgerShop {
 
-	// Make instances of the menu items according to subclass
-	// THis is a long way to do it so will comment this out for now
-//	Burgers zero = new Burgers("Cheese Burger", (float) 15.50);
-//	Burgers one = new Burgers("Avocado Burger", (float) 17.00);
-//	Burgers two = new Burgers("Vegan Burger", (float) 18.50);
-//	Burgers three = new Burgers("Fisherman Burger", (float) 17.00);
-//	Burgers four = new Burgers("Buffalo Chicken Burger", (float) 13.00);
-//	Burgers five = new Burgers("Black Truffle Bruger", (float) 27.50);
-//	Burgers six = new Burgers("Crispy Froe Gras Burger", (float) 34.00);
-//
-//	Snacks seven = new Snacks("Chips", (float) 7.50);
-//	Snacks eight = new Snacks("Sweet Potato Chips", (float) 10.00);
-//	Snacks nine = new Snacks("Onion Rings", (float) 5.00);
-//	Snacks ten = new Snacks("Buffalo Chicken Wings", (float) 12.00);
-//	Snacks eleven = new Snacks("Fish Fingers", (float) 8.00);
-//
-//	Drinks twelve = new Drinks("Coke", (float) 2.00);
-//	Drinks thirteen = new Drinks("Sprite", (float) 2.00);
-//	Drinks fourteen = new Drinks("Fanta", (float) 2.00);
-//	Drinks fifteen = new Drinks("Milkshake", (float) 4.00);
-
 	ArrayList<MenuFood> cartArray = new ArrayList<MenuFood>();
 
 	public BurgerShop() {
@@ -41,8 +20,10 @@ public class BurgerShop {
 	 */
 	public void addBurger(String name, float price) {
 
+		// create a new instance of a burger using the passed in values
 		Burgers burger = new Burgers(name, price);
 
+		// add the created burger instance to ArrayList
 		cartArray.add(burger);
 
 	}
@@ -59,12 +40,14 @@ public class BurgerShop {
 	 */
 	public void addSnack(String name, float price, SIZE Size) {
 
+		// Use if else to change the price of the snack according to size
 		if (Size == SIZE.L) {
 			price = price + 3;
 		} else if (Size == SIZE.XL) {
 			price = price + 4;
 		}
 
+		// creates a new instance of snack and adds to ArrayList
 		Snacks snack = new Snacks(name, price, Size);
 
 		cartArray.add(snack);
@@ -85,12 +68,14 @@ public class BurgerShop {
 	 */
 	public void addDrink(String name, float price, SIZE Size) {
 
+		// Adjusts price according to size
 		if (Size == SIZE.L) {
 			price = price + 3;
 		} else if (Size == SIZE.XL) {
 			price = price + 4;
 		}
 
+		// create instance of drink using passed in values and add to ArrayList
 		Drinks drink = new Drinks(name, price, Size);
 
 		cartArray.add(drink);
@@ -106,21 +91,25 @@ public class BurgerShop {
 	 */
 	public void showCart() {
 
+		// This value will be used to print the total cost of the cart
 		float total = 0;
 
+		// For loop goes through
 		for (int i = 0; i < cartArray.size(); i++) {
 
-			MenuFood data = cartArray.get(i);
+			// stores the current index of cartArray to be used
+			MenuFood print = cartArray.get(i);
 
-			total = total + data.price;
+			// increments total price as it cycles through each element of cartArray
+			total = total + print.price;
 
-			String num = String.format("%.02f", data.price);
-
-			System.out.println(i + " - " + data.foodName + ": $" + num);
+			// Prints out the items in the cart per the requirements
+			System.out.println(i + " - " + print.foodName + ": $" + String.format("%.02f", print.price));
 
 		}
 
-		System.out.println(String.format("%.02f", total));
+		// prints out the total amount of the items in the cart
+		System.out.println("Total: $" + String.format("%.02f", total));
 
 	}
 
