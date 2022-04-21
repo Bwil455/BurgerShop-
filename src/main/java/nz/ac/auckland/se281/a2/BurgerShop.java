@@ -203,7 +203,10 @@ public class BurgerShop {
 	 * @param posCart
 	 */
 	public void removeItem(int posCart) {
-		// TODO TASK3
+
+		if (posCart < 0 || posCart >= cartArray.size()) {
+			MessagesCLI.NOT_VALID_CART_POSITION.printMessage();
+		}
 	}
 
 	/**
