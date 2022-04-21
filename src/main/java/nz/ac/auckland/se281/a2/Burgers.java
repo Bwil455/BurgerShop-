@@ -20,4 +20,9 @@ public class Burgers extends MenuFood {
 		return price;
 	}
 
+	@Override
+	public MenuFood.Type getType() {
+		return Type.BURGER;
+	}
+
 }

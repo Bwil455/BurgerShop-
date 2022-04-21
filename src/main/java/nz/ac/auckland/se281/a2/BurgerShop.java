@@ -2,7 +2,9 @@ package nz.ac.auckland.se281.a2;
 
 import java.util.ArrayList;
 
+import nz.ac.auckland.se281.a2.MenuFood.Type;
 import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
+import nz.ac.auckland.se281.a2.cli.MessagesCLI;
 
 public class BurgerShop {
 
@@ -94,22 +96,55 @@ public class BurgerShop {
 		// This value will be used to print the total cost of the cart
 		float total = 0;
 
-		// For loop goes through
-		for (int i = 0; i < cartArray.size(); i++) {
+		// Variable used to check if there are any elements in cartArray
+		boolean empty = cartArray.isEmpty();
 
-			// stores the current index of cartArray to be used
-			MenuFood print = cartArray.get(i);
+		// If else statement to change output depending on if cart is empty or not
+		if (empty == true) {
 
-			// increments total price as it cycles through each element of cartArray
-			total = total + print.price;
+			// print error message if cart empty
+			MessagesCLI.CART_EMPTY.printMessage();
 
-			// Prints out the items in the cart per the requirements
-			System.out.println(i + " - " + print.foodName + ": $" + String.format("%.02f", print.price));
+		} else {
+
+			// Iterates through the cartArray, stores current element in print variable
+			for (int i = 0; i < cartArray.size(); i++) {
+
+				MenuFood print = cartArray.get(i);
+
+				// adds up the total of the cart as it goes
+				total = total + print.price;
+
+				// if else statement changes printed output depending on whether the current
+				// element is of type drink/snack or burger, prints out the according message
+				if (print.getType() == Type.DRINK || print.getType() == Type.SNACK) {
+
+					System.out.println(i + " - " + print.foodName + " " + "(" + print.Size + ")" + ": $"
+							+ String.format("%.02f", print.price));
+
+				} else if (print.getType() == Type.BURGER) {
+
+					System.out.println(i + " - " + print.foodName + ": $" + String.format("%.02f", print.price));
+				}
+			}
+
+			// final if else statement adjusts printing the total cost depending on
+			// if a discount has been applied or not
+			if (total > 100.00) {
+
+				MessagesCLI.DISCOUNT.printMessage();
+
+				total = (float) (total - (total * 0.25));
+
+				System.out.println("Total: $" + String.format("%.02f", total));
+
+			} else if (total < 100.00) {
+
+				System.out.println("Total: $" + String.format("%.02f", total));
+
+			}
 
 		}
-
-		// prints out the total amount of the items in the cart
-		System.out.println("Total: $" + String.format("%.02f", total));
 
 	}
 

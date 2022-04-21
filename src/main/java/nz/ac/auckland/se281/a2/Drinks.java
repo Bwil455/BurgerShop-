@@ -21,4 +21,9 @@ public class Drinks extends MenuFood {
 		return Size;
 	}
 
+	@Override
+	public MenuFood.Type getType() {
+		return Type.DRINK;
+	}
+
 }

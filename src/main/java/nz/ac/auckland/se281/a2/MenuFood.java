@@ -4,6 +4,10 @@ import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 
 public abstract class MenuFood {
 
+	public enum Type {
+		BURGER, SNACK, DRINK
+	}
+
 	public String foodName;
 	public float price;
 	public SIZE Size;
@@ -16,6 +20,8 @@ public abstract class MenuFood {
 		this.Size = Size;
 
 	}
+
+	public abstract Type getType();
 
 	public MenuFood() {
 		// TODO Auto-generated constructor stub

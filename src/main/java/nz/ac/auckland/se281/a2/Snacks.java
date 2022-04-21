@@ -10,8 +10,9 @@ public class Snacks extends MenuFood {
 
 	}
 
-	public String getName() {
-		return foodName;
+	@Override
+	public MenuFood.Type getType() {
+		return Type.SNACK;
 	}
 
 	public float getPrice() {
