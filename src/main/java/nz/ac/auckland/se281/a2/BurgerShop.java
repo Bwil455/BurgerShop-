@@ -40,17 +40,17 @@ public class BurgerShop {
 	 * @param price
 	 * @param size
 	 */
-	public void addSnack(String name, float price, SIZE Size) {
+	public void addSnack(String name, float price, SIZE size) {
 
 		// Use if else to change the price of the snack according to size
-		if (Size == SIZE.L) {
+		if (size == SIZE.L) {
 			price = price + 3;
-		} else if (Size == SIZE.XL) {
+		} else if (size == SIZE.XL) {
 			price = price + 4;
 		}
 
 		// creates a new instance of snack and adds to ArrayList
-		Snacks snack = new Snacks(name, price, Size);
+		Snacks snack = new Snacks(name, price, size);
 
 		cartArray.add(snack);
 	}
@@ -68,17 +68,17 @@ public class BurgerShop {
 	 * @param price
 	 * @param size
 	 */
-	public void addDrink(String name, float price, SIZE Size) {
+	public void addDrink(String name, float price, SIZE size) {
 
 		// Adjusts price according to size
-		if (Size == SIZE.L) {
+		if (size == SIZE.L) {
 			price = price + 3;
-		} else if (Size == SIZE.XL) {
+		} else if (size == SIZE.XL) {
 			price = price + 4;
 		}
 
 		// create instance of drink using passed in values and add to ArrayList
-		Drinks drink = new Drinks(name, price, Size);
+		Drinks drink = new Drinks(name, price, size);
 
 		cartArray.add(drink);
 	}
@@ -112,8 +112,9 @@ public class BurgerShop {
 
 				MenuFood print = cartArray.get(i);
 
+				float comboPrice = (float) (print.burgerPrice + print.snackPrice + (0.50 * print.drinkPrice));
 				// adds up the total of the cart as it goes
-				total = total + print.price;
+				total = total + print.price + comboPrice;
 
 				// if else statement changes printed output depending on whether the current
 				// element is of type drink/snack or burger, prints out the according message
@@ -125,6 +126,11 @@ public class BurgerShop {
 				} else if (print.getType() == Type.BURGER) {
 
 					System.out.println(i + " - " + print.foodName + ": $" + String.format("%.02f", print.price));
+				} else if (print.getType() == Type.COMBO) {
+
+					System.out.println(i + " - COMBO : (" + print.burgerName + ", " + print.snackName + " ("
+							+ print.Size + "), " + print.drinkName + " (" + print.Size + ")): $"
+							+ String.format("%.02f", comboPrice));
 				}
 			}
 
@@ -167,7 +173,22 @@ public class BurgerShop {
 	 */
 	public void addCombo(String nameBurger, float priceBurger, String nameSnack, float priceSnack, String nameDrink,
 			float priceDrink, SIZE size) {
-		// TODO TASK2
+
+		// Create new instance of Combo
+		Combo combo = new Combo(nameBurger, priceBurger, nameSnack, priceSnack, nameDrink, priceDrink, size);
+
+		// change the size of both the snack and the drink depending on size input from
+		// user then add to cartArray
+		if (size == SIZE.L) {
+			priceSnack = priceSnack + 3;
+			priceDrink = priceDrink + 3;
+
+		} else if (size == SIZE.XL) {
+			priceSnack = priceSnack + 4;
+			priceDrink = priceDrink + 4;
+		}
+
+		cartArray.add(combo);
 	}
 
 	/**
