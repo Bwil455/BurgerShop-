@@ -134,12 +134,14 @@ public class BurgerShop {
 
 				MessagesCLI.DISCOUNT.printMessage();
 
+				// adjusts total with 25% discount then prints total
 				total = (float) (total - (total * 0.25));
 
 				System.out.println("Total: $" + String.format("%.02f", total));
 
 			} else if (total < 100.00) {
 
+				// prints total
 				System.out.println("Total: $" + String.format("%.02f", total));
 
 			}
