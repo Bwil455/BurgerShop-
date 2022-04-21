@@ -123,7 +123,7 @@ public class BurgerShop {
 				// message
 				if (print.getType() == Type.DRINK || print.getType() == Type.SNACK) {
 
-					System.out.println(i + " - " + print.foodName + " " + "(" + print.Size + ")" + ": $"
+					System.out.println(i + " - " + print.foodName + " " + "(" + print.size + ")" + ": $"
 							+ String.format("%.02f", print.price));
 
 				} else if (print.getType() == Type.BURGER) {
@@ -132,7 +132,7 @@ public class BurgerShop {
 				} else if (print.getType() == Type.COMBO) {
 
 					System.out.println(i + " - COMBO : (" + print.burgerName + ", " + print.snackName + " ("
-							+ print.Size + "), " + print.drinkName + " (" + print.Size + ")): $"
+							+ print.size + "), " + print.drinkName + " (" + print.size + ")): $"
 							+ String.format("%.02f", comboPrice));
 				}
 			}
@@ -228,6 +228,10 @@ public class BurgerShop {
 	 * 
 	 */
 	public void confirmOrder() {
-		// TODO TASK4
+
+		if (cartArray.isEmpty()) {
+			MessagesCLI.ORDER_INVALID_CART_EMPTY.printMessage();
+		}
+
 	}
 }

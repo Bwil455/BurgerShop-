@@ -4,25 +4,17 @@ import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 
 public class Snacks extends MenuFood {
 
-	public Snacks(String foodName, float price, SIZE Size) {
+	public Snacks(String foodName, float price, SIZE size) {
 		super();
 		this.foodName = foodName;
 		this.price = price;
-		this.Size = Size;
+		this.size = size;
 
 	}
 
 	@Override
-	public MenuFood.Type getType() {
+	protected MenuFood.Type getType() {
 		return Type.SNACK;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public SIZE getSize() {
-		return Size;
 	}
 
 }

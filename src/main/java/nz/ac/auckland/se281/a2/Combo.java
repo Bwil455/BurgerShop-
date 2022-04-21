@@ -23,13 +23,9 @@ public class Combo extends MenuFood {
 	}
 
 	@Override
-	public MenuFood.Type getType() {
+	protected MenuFood.Type getType() {
 		// TODO Auto-generated method stub
 		return Type.COMBO;
-	}
-
-	public SIZE getSize() {
-		return Size;
 	}
 
 }

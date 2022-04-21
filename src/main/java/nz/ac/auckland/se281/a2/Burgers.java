@@ -11,17 +11,7 @@ public class Burgers extends MenuFood {
 	}
 
 	@Override
-	public String getName() {
-		return foodName;
-	}
-
-	@Override
-	public float getPrice() {
-		return price;
-	}
-
-	@Override
-	public MenuFood.Type getType() {
+	protected MenuFood.Type getType() {
 		return Type.BURGER;
 	}
 

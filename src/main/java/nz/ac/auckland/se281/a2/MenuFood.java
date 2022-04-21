@@ -4,26 +4,26 @@ import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 
 public abstract class MenuFood {
 
-	public enum Type {
+	protected enum Type {
 		BURGER, SNACK, DRINK, COMBO
 	}
 
 	// Change the params passed into the MenuFood to fit that of the combo
-	public String burgerName;
-	public String snackName;
-	public String drinkName;
+	protected String burgerName;
+	protected String snackName;
+	protected String drinkName;
 
-	public float burgerPrice;
-	public float snackPrice;
-	public float drinkPrice;
+	protected float burgerPrice;
+	protected float snackPrice;
+	protected float drinkPrice;
 
-	public String foodName;
-	public float price;
-	public SIZE Size;
+	protected String foodName;
+	protected float price;
+	protected SIZE size;
 
 	// This is the general constructor, this must be modified for snacks and drinks
 	public MenuFood(String burgerName, float burgerPrice, String snackName, float snackPrice, String drinkName,
-			float drinkPrice, SIZE Size) {
+			float drinkPrice, SIZE size) {
 
 		this.burgerName = burgerName;
 		this.burgerPrice = burgerPrice;
@@ -31,27 +31,31 @@ public abstract class MenuFood {
 		this.snackPrice = snackPrice;
 		this.drinkName = drinkName;
 		this.drinkPrice = drinkPrice;
-		this.Size = Size;
+		this.size = size;
 
 	}
-
-	public abstract Type getType();
 
 	public MenuFood() {
 		// TODO Auto-generated constructor stub
 	}
 
-	// Two getters just for general purpose
-	public String getName() {
+	protected abstract Type getType();
+
+	protected String getName() {
 		return foodName;
 	}
 
-	public float getPrice() {
+	protected float getPrice() {
 		return price;
 	}
 
-	public SIZE getSize() {
+	protected SIZE getSize() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	// methods that count number of subclass instances present in arraylist used
+//	public int getBurgers() {
+//		for 
+//	}
 }
