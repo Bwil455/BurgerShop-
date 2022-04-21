@@ -204,8 +204,12 @@ public class BurgerShop {
 	 */
 	public void removeItem(int posCart) {
 
+		// if statement, checks whether posCart is a valid index (then returns error
+		// message) if not removes from cart
 		if (posCart < 0 || posCart >= cartArray.size()) {
 			MessagesCLI.NOT_VALID_CART_POSITION.printMessage();
+		} else {
+			cartArray.remove(posCart);
 		}
 	}
 
