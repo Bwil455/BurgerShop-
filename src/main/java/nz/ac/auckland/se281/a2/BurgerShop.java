@@ -112,12 +112,15 @@ public class BurgerShop {
 
 				MenuFood print = cartArray.get(i);
 
+				// stores the price of a combo into a single variable, then added to total if
+				// need be
 				float comboPrice = (float) (print.burgerPrice + print.snackPrice + (0.50 * print.drinkPrice));
 				// adds up the total of the cart as it goes
 				total = total + print.price + comboPrice;
 
 				// if else statement changes printed output depending on whether the current
-				// element is of type drink/snack or burger, prints out the according message
+				// element is of type drink/snack or burger or combo, prints out the according
+				// message
 				if (print.getType() == Type.DRINK || print.getType() == Type.SNACK) {
 
 					System.out.println(i + " - " + print.foodName + " " + "(" + print.Size + ")" + ": $"
@@ -174,9 +177,6 @@ public class BurgerShop {
 	public void addCombo(String nameBurger, float priceBurger, String nameSnack, float priceSnack, String nameDrink,
 			float priceDrink, SIZE size) {
 
-		// Create new instance of Combo
-		Combo combo = new Combo(nameBurger, priceBurger, nameSnack, priceSnack, nameDrink, priceDrink, size);
-
 		// change the size of both the snack and the drink depending on size input from
 		// user then add to cartArray
 		if (size == SIZE.L) {
@@ -187,6 +187,9 @@ public class BurgerShop {
 			priceSnack = priceSnack + 4;
 			priceDrink = priceDrink + 4;
 		}
+
+		// Create new instance of Combo
+		Combo combo = new Combo(nameBurger, priceBurger, nameSnack, priceSnack, nameDrink, priceDrink, size);
 
 		cartArray.add(combo);
 	}
