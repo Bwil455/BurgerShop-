@@ -217,7 +217,9 @@ public class BurgerShop {
 	 * removes all elements in the cart
 	 */
 	public void clearCart() {
-		// TODO TASK3
+
+		cartArray.removeAll(cartArray);
+
 	}
 
 	/**
