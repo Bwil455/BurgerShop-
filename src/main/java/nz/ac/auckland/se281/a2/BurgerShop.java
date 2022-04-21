@@ -14,6 +14,27 @@ public class BurgerShop {
 
 	}
 
+	// returns the number of instances of the type passed into method from the
+	// cartArray
+	public int numType(MenuFood.Type Type) {
+
+		int numOf = 0;
+
+		for (int i = 0; i < cartArray.size(); i++) {
+
+			MenuFood checkType = cartArray.get(i);
+
+			// checks if each element is of the same type as that passed into the method, if
+			// so increments counter
+			if (checkType.getType() == Type) {
+				numOf++;
+			}
+
+		}
+
+		return numOf;
+	}
+
 	/**
 	 * Add a burger in the cart
 	 * 
@@ -231,6 +252,8 @@ public class BurgerShop {
 
 		if (cartArray.isEmpty()) {
 			MessagesCLI.ORDER_INVALID_CART_EMPTY.printMessage();
+		} else {
+			System.out.println(numType(Type.BURGER));
 		}
 
 	}
