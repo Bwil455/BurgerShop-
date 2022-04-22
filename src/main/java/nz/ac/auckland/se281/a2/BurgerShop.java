@@ -60,7 +60,7 @@ public class BurgerShop {
 			totalSecs = totalSecs + (45 + ((drinks - 1) * 15));
 		}
 
-		if (snacks != 0) {
+		if (combos != 0) {
 			totalSecs = totalSecs + (combos * 525);
 		}
 
@@ -72,7 +72,7 @@ public class BurgerShop {
 		String confirmed = MessagesCLI.ESTIMATE_WAITING_TIME.getMessage();
 
 		System.out.print(confirmed);
-		System.out.printf(" %d hours %d minutes %d seconds", hours, mins, secs);
+		System.out.printf("%d hours %d minutes %d seconds", hours, mins, secs);
 		System.out.println();
 
 	}
@@ -294,10 +294,14 @@ public class BurgerShop {
 	 */
 	public void confirmOrder() {
 
+		// set variables that will count amount of instances of respective types
 		int burgers = 0;
 		int snacks = 0;
 		int drinks = 0;
-		int combos = 0;
+
+		// used to check if there is a combo opportunity
+		int comboOp = 0;
+
 		// if cart empty error message
 		if (cartArray.isEmpty()) {
 			MessagesCLI.ORDER_INVALID_CART_EMPTY.printMessage();
@@ -308,11 +312,63 @@ public class BurgerShop {
 			burgers = numType(Type.BURGER);
 			snacks = numType(Type.SNACK);
 			drinks = numType(Type.DRINK);
-			combos = numType(Type.COMBO);
 
-			calcWaitingTime();
-//			System.out.println("I found: " + burgers + " burgers. I found: " + snacks + " snacks. I found: " + drinks
-//					+ " drinks. I found: " + combos + " combos.");
+			// contains at least 1 possibility of a combo
+			if (burgers > 0 && snacks > 0 && drinks > 0) {
+
+				// ArrayLists to contain
+				ArrayList<Integer> positionSnack = new ArrayList<Integer>();
+				ArrayList<Integer> positionDrink = new ArrayList<Integer>();
+
+				// for loops adds the elements that contain the respective types in their
+				// arraylists
+				for (int i = 0; i < cartArray.size(); i++) {
+					MenuFood current = cartArray.get(i);
+
+					if (current.getType() == Type.SNACK) {
+						positionSnack.add(i);
+					} else if (current.getType() == Type.DRINK) {
+						positionDrink.add(i);
+					}
+				}
+
+				// embedded for loop compares each elements size, if same size will prevent the
+				// order and display error message
+				for (int j = 0; j < positionSnack.size(); j++) {
+					for (int k = 0; k < positionDrink.size(); k++) {
+
+						int snackEle = positionSnack.get(j);
+						int drinkEle = positionDrink.get(k);
+
+						MenuFood snack = cartArray.get(snackEle);
+						MenuFood drink = cartArray.get(drinkEle);
+
+						if (snack.size == drink.size) {
+							comboOp = 1;
+
+						}
+					}
+				}
+
+				// If statement uses comboOp to determine the output
+				if (comboOp == 0) {
+
+					showCart();
+					calcWaitingTime();
+					clearCart();
+				} else if (comboOp == 1) {
+					MessagesCLI.MISSED_COMBO.printMessage();
+
+				}
+
+				// If cart was valid/ no opportunity for a potential combo then prints waiting
+				// time and clears cart
+			} else {
+				showCart();
+				calcWaitingTime();
+				clearCart();
+			}
+
 		}
 
 	}
