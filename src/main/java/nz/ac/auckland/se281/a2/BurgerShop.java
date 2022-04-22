@@ -35,6 +35,48 @@ public class BurgerShop {
 		return numOf;
 	}
 
+	public void calcWaitingTime() {
+
+		int secs;
+		int mins;
+		int hours;
+
+		int burgers = numType(Type.BURGER);
+		int snacks = numType(Type.SNACK);
+		int drinks = numType(Type.DRINK);
+		int combos = numType(Type.COMBO);
+
+		int totalSecs = 0;
+
+		if (burgers != 0) {
+			totalSecs = totalSecs + (300 + ((burgers - 1) * 60));
+		}
+
+		if (snacks != 0) {
+			totalSecs = totalSecs + (180 + ((snacks - 1) * 30));
+		}
+
+		if (drinks != 0) {
+			totalSecs = totalSecs + (45 + ((drinks - 1) * 15));
+		}
+
+		if (snacks != 0) {
+			totalSecs = totalSecs + (combos * 525);
+		}
+
+		// code adapted from https://stackoverflow.com/a/6118983
+		hours = totalSecs / 3600;
+		mins = (totalSecs % 3600) / 60;
+		secs = (totalSecs % 3600) - (mins * 60);
+
+		String confirmed = MessagesCLI.ESTIMATE_WAITING_TIME.getMessage();
+
+		System.out.print(confirmed);
+		System.out.printf(" %d hours %d minutes %d seconds", hours, mins, secs);
+		System.out.println();
+
+	}
+
 	/**
 	 * Add a burger in the cart
 	 * 
@@ -247,13 +289,30 @@ public class BurgerShop {
 	 * This method confirms the order, showing the estimated pick up time. It also
 	 * give a warning if there are missing opportunities for COMBO menus
 	 * 
+	 * @param burgersFound
+	 * 
 	 */
 	public void confirmOrder() {
 
+		int burgers = 0;
+		int snacks = 0;
+		int drinks = 0;
+		int combos = 0;
+		// if cart empty error message
 		if (cartArray.isEmpty()) {
 			MessagesCLI.ORDER_INVALID_CART_EMPTY.printMessage();
 		} else {
-			System.out.println(numType(Type.BURGER));
+
+			// finds the amount of each subclass (this will be used to calculate waiting
+			// time)
+			burgers = numType(Type.BURGER);
+			snacks = numType(Type.SNACK);
+			drinks = numType(Type.DRINK);
+			combos = numType(Type.COMBO);
+
+			calcWaitingTime();
+//			System.out.println("I found: " + burgers + " burgers. I found: " + snacks + " snacks. I found: " + drinks
+//					+ " drinks. I found: " + combos + " combos.");
 		}
 
 	}
